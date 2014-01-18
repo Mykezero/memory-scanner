@@ -1,1 +1,7 @@
 c:\users\mike\documents\visual studio 2013\Projects\Scanner\Scanner\bin\Debug\Scanner.exe.config
+C:\Users\Mike\Documents\GitHub\Scanner\Scanner\Scanner\bin\Debug\Scanner.exe.config
+C:\Users\Mike\Documents\GitHub\Scanner\Scanner\Scanner\obj\Debug\Scanner.csprojResolveAssemblyReference.cache
+C:\Users\Mike\Documents\GitHub\Scanner\Scanner\Scanner\bin\Debug\Scanner.exe
+C:\Users\Mike\Documents\GitHub\Scanner\Scanner\Scanner\bin\Debug\Scanner.pdb
+C:\Users\Mike\Documents\GitHub\Scanner\Scanner\Scanner\obj\Debug\Scanner.exe
+C:\Users\Mike\Documents\GitHub\Scanner\Scanner\Scanner\obj\Debug\Scanner.pdb

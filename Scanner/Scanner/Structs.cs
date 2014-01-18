@@ -10,6 +10,7 @@ namespace Vivisection
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct PLAYERINFO
     {
+
         public int HPMax;
         public int MPMax;
         public Job MainJob;

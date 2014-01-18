@@ -1,21 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Diagnostics; // For Process
+﻿// Author: Myrmidon
+// Site: FFEVO.net
+// All credit to him!
+// http://www.ffevo.net/topic/2726-autodetecting-characters-logged-in-out-for-multiboxers/
+
+using System.Diagnostics;
+using FFACETools;
 
 namespace Vivisection
 {
     public class FFInstance
     {
         public Process MyProcess { get; private set; }
-        public int Instance { get; private set; }
+        public FFACE Instance { get; private set; }
 
         #region Constructor
         public FFInstance(Process proc)
         {
             MyProcess = proc;
-            Instance = FFACE.CreateInstance((uint)MyProcess.Id);
+            Instance = new FFACE(MyProcess.Id);
         }
         #endregion
 
@@ -40,17 +42,12 @@ namespace Vivisection
         #region Equals Override
         public override bool Equals(object obj)
         {
-            if (obj is FFInstance)
-            {
-                return MyProcess.Id.Equals(((FFInstance)obj).MyProcess.Id);
-            }
-            return false;
+            FFInstance temp = obj as FFInstance;
+            if (temp == null) { return false; }
+            return MyProcess.Id == temp.MyProcess.Id;
         }
 
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
+        public override int GetHashCode() { return base.GetHashCode(); }
         #endregion
     }
 }
