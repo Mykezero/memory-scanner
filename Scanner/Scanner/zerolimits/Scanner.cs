@@ -38,7 +38,7 @@ namespace Scanner
         /// <summary>
         /// The scanner we will use to find our signaturw
         /// </summary>
-        SigScan SigScan;
+        public SignatureScanner SigScan { get; set; }
 
         /// <summary>
         /// Should we print to the console?
@@ -79,7 +79,9 @@ namespace Scanner
             }
 
             // Get the process we are reading memory from.
-            this.Process = Process.GetProcessesByName(this.ProcessName).FirstOrDefault();
+            this.Process = Process
+                .GetProcessesByName(this.ProcessName)
+                .FirstOrDefault();
 
             if (this.Process == null)
             {
@@ -103,8 +105,8 @@ namespace Scanner
             OutputMessage("Module Located!");
 
             // Create our signature scanner for our process and module.
-            this.SigScan = new SigScan(
-                this.Process, this.Module.BaseAddress, this.Module.ModuleMemorySize
+            this.SigScan = new SignatureScanner(
+                this.Process, this.Module.BaseAddress, true
                 );
 
             OutputMessage("Scanner Created!");

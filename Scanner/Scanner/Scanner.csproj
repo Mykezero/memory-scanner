@@ -41,13 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers.cs" />
-    <Compile Include="Memory.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="chocopon\Memory.cs" />
+    <Compile Include="atom0s\Helpers.cs" />
+    <Compile Include="atom0s\Memory.cs" />
+    <Compile Include="sruon\MemoryReader.cs" />
+    <Compile Include="classes\PointerResolver.cs" />
+    <Compile Include="classes\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scanner.cs" />
-    <Compile Include="Signature.cs" />
-    <Compile Include="SigScan.cs" />
+    <Compile Include="classes\Scanner.cs" />
+    <Compile Include="classes\Signature.cs" />
+    <Compile Include="classes\SignatureScanner.cs" />
+    <Compile Include="atom0s\SigScan.cs" />
+    <Compile Include="sruon\SigScanner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

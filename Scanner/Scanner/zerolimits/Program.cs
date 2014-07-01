@@ -30,17 +30,18 @@ namespace Scanner
             // var mask = "xxxxxxxxxxxxxxxxxxxxxxxx";
             // int offset = 0x135D4AA6;
 
-            var mask = "xxxxxxxxx";
-            var pattern = "8908C6431D018B462C";
-            var offset = 0x11B14C86;
+            // var mask = "xxxxxxxxx";
+            // var pattern = "8908C6431D018B462C";
+            // var offset = 0x11B14C86;
 
-             
+            var pattern = "394CBA1C8D44BA1C7406";
+            var mask = "xxxxxxxxxx";
+            var offset = 0;
 
             //Signature and Mask for Aggroed creatures
             //Used to access top three aggroing creatures
             //8901C6431D018B4774
             //xxxxxxxxx
-
 
             // Create our signature to search for.
             var signature = Signature.Create(pattern, mask, offset);
@@ -59,6 +60,16 @@ namespace Scanner
 
             // Find the pointer
             var pointer = scanner.FindPointer(signature);
+
+            /*
+            // MPL
+            List<int> values = new List<int>() { 
+                0xF5D9A8,//2.2
+                0x0
+            };
+            */
+
+            // var pointer = PointerResolver.ResolvePointerPath(scanner.Process, values, 0);
             Console.Write("Pointer found: {0}", (pointer).ToString("X2"));
             Console.ReadLine();
 
