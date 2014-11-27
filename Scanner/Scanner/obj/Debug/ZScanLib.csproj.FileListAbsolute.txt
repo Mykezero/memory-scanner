@@ -1,0 +1,8 @@
+C:\Users\Mike\Documents\GitHub\Scanner\Scanner\Scanner\bin\Debug\.ZScanLib.exe.config
+C:\Users\Mike\Documents\GitHub\Scanner\Scanner\Scanner\obj\Debug\ZScanLib.csprojResolveAssemblyReference.cache
+C:\Users\Mike\Documents\GitHub\Scanner\Scanner\Scanner\bin\Debug\.ZScanLib.exe
+C:\Users\Mike\Documents\GitHub\Scanner\Scanner\Scanner\bin\Debug\.ZScanLib.pdb
+C:\Users\Mike\Documents\GitHub\Scanner\Scanner\Scanner\obj\Debug\.ZScanLib.exe
+C:\Users\Mike\Documents\GitHub\Scanner\Scanner\Scanner\obj\Debug\.ZScanLib.pdb
+C:\Users\Mike\Documents\GitHub\Scanner\Scanner\Scanner\bin\Debug\PowerArgs.dll
+C:\Users\Mike\Documents\GitHub\Scanner\Scanner\Scanner\bin\Debug\PowerArgs.xml

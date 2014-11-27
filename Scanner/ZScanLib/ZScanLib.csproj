@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{05447176-3A3E-462B-B909-191A65937F2C}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{C5BA1350-22BD-41BB-8864-2D65FD761075}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ZeroLimits.ZScanLib</RootNamespace>
-    <AssemblyName>.ZScanLib</AssemblyName>
+    <AssemblyName>ZScanLib</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PowerArgs">
-      <HintPath>..\packages\PowerArgs.2.3.1.0\lib\net40\PowerArgs.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,21 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
+    <Compile Include="MemoryManagement\MemoryAddress.cs" />
+    <Compile Include="MemoryManagement\MemoryDefinitions.cs" />
+    <Compile Include="MemoryManagement\MemoryEnvironment.cs" />
+    <Compile Include="MemoryManagement\MemoryFilter.cs" />
+    <Compile Include="MemoryManagement\MemoryPage.cs" />
+    <Compile Include="MemoryManagement\MemoryPointer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\DefaultBrowserUsageTemplate.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ZScanLib\ZScanLib.csproj">
-      <Project>{c5ba1350-22bd-41bb-8864-2d65fd761075}</Project>
-      <Name>ZScanLib</Name>
-    </ProjectReference>
+    <Compile Include="MemoryManagement\Signature.cs" />
+    <Compile Include="Documentation\SignatureExamples.cs" />
+    <Compile Include="MemoryManagement\SigScan.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
