@@ -1,5 +1,5 @@
 # ZScanLib
-A class library to make it easier to work and manipulate process memory. 
+A class library to make it easier to work with and manipulate process memory. 
 
 ### License
 ZScanLib is a free software project licensed under the GPLv3 license. A copy of this license can be found in the project's root directory. 
