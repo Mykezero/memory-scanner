@@ -28,22 +28,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using PowerArgs;
-using ZeroLimits.ZScanLib.MemoryManagement;
 
-namespace ZeroLimits.ZScanLib
+namespace ZScanLib
 {
-    public enum ScanType
-    {
-        Signature,
-        Pointer
-    }
-
-    public enum AllocationStrategy
-    {
-        Dynamic,
-        Static
-    }
-
     public class Program
     {
         public class ScannerArgs
@@ -67,61 +54,31 @@ namespace ZeroLimits.ZScanLib
 
         public static void Main(string[] args)
         {
-            // In this example, we'll be looking for the player's hp signature
-            // and will print out the player's current hp. 
-
-            // Static Pointers
-
-            // HP is located here: 
-            // FFXiMain.dll+5D59EC
-
             // Obtain the Scanner Args data from the user. 
             var parsed = Args.Parse<ScannerArgs>(args);
-
-            // Set up the scanner so that it does scan pages of memory. 
-            Memory.Scanner.PageScanEnabled = false;
-
-            // Set module scan to false, we are looking for dynamic memory
-            // that resided in application pages of memory. 
-            Memory.Scanner.ModuleScanEnabled = true;
+            var signature = new Signature(parsed.Signature, parsed.Mask, parsed.Offset);
 
             // Set the target process. 
-            var process = Process.GetProcessesByName(parsed.ProcessName)
-                .FirstOrDefault();
+            var process = Process.GetProcessesByName(parsed.ProcessName).FirstOrDefault();
+            if (process == null)
+            {
+                Console.WriteLine("No process found. ");
+                Console.WriteLine("Press enter to quit...");
+                Console.ReadLine();
+                return;
+            }
+            
+            // Scan and retrieve the address. 
+            MemoryScanner scanner = new MemoryScanner(process);
+            var address = scanner.Scan(signature);
 
-            if (process == null) return;
-
-            // Set the scanner's process to search in. 
-            Memory.Scanner.Process = process;
-
-            // Find final fantasy's main module. 
-            var module = (from ProcessModule m in process.Modules
-                          where m.ModuleName.ToLower() == ("ffximain.dll")
-                          select m).FirstOrDefault();
-
-            if (module == null) return;
-
-            // We are going to read the whole dll file's memory in one go
-            // so start at its base address. This is where the player's
-            // hp will be found. 
-            Memory.Scanner.Address = module.BaseAddress;
-            Memory.Scanner.Size = module.ModuleMemorySize;            
-
-            // Scan for the byte pattern. 
-            // IntPtr address = Memory.Scanner.Scan(parsed.Mask,
-            //    Helpers.HexStringToArray(parsed.Signature),
-            //    parsed.Offset);            
-
-            // Save to save the read data. 
-            // Will be reading an int so four bytes. 
+            // Read the value from memory. 
             byte[] btBuffer = new byte[sizeof(int)];
-            IntPtr address = Memory.Scanner.Scan(parsed.Mask, Helpers.HexStringToArray(parsed.Signature), parsed.Offset);
             Memory.Peek(process, address, btBuffer);
+            
+            // Convert and display it to the user. 
             int value = BitConverter.ToInt32(btBuffer, 0);
             Console.WriteLine(value);
-
-            // Read the memory. 
-            // Memory.Peek(process, address, btBuffer)
 
             Console.WriteLine("Press enter to quit...");
             Console.ReadLine();
