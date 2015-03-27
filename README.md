@@ -9,11 +9,10 @@ ZScanLib is a free software project licensed under the GPLv3 license. A copy of 
 * .NET Framework 4.5
 
 ### Contributing
-Everyone is welcome to contribute to this project; just do your best to test the code you want to contribute, and I'll look over and merge your pull request. 
+Everyone is welcome to contribute to this project; just do your best to test the code you want to contribute, and I'll look it over and merge your pull request. 
 
 ### Examples
-The library treats searching virtual memory and module memory for a pattern the same way elevating you from dealing with 
-virtual memory or access flags directly. 
+The library treats searching virtual memory and module memory for a pattern the same way elevating you from dealing with virtual memory or access flags directly. 
 
 ```
 // Get the first PlayOnline process. 
