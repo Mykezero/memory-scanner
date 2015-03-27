@@ -43,9 +43,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZeroLimits.ZScanLib
+namespace ZScanLib
 {
-    public class Helpers
+    internal class Helpers
     {
         /// <summary>
         /// Merges lists of byte arrays into one. 

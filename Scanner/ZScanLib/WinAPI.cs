@@ -1,13 +1,35 @@
-﻿using System;
+﻿
+/*///////////////////////////////////////////////////////////////////
+<ZScanLib, a small library for reading and working with memory.>
+Copyright (C) <2014>  <Zerolimits>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+*/
+///////////////////////////////////////////////////////////////////
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZeroLimits.ZScanLib.MemoryManagement
+namespace ZScanLib
 {
-    public partial class Memory
+    /// <summary>
+    /// Contains definitions for functions we're using in the WinAPI. 
+    /// </summary>
+    internal class WinAPI
     {
         /// <summary>
         /// kernel32.ReadProcessMemory Import
@@ -37,7 +59,7 @@ namespace ZeroLimits.ZScanLib.MemoryManagement
         /// <param name="lpNumberOfBytesWritten"></param>
         /// <returns></returns>
         [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern bool WriteProcessMemory(
+        internal static extern bool WriteProcessMemory(
             IntPtr hProcess,
             IntPtr lpBaseAddress,
             [In, Out] byte[] lpBuffer,
@@ -54,7 +76,7 @@ namespace ZeroLimits.ZScanLib.MemoryManagement
         /// <param name="dwLength">The amount of bytes read</param>
         /// <returns>0 - Failure</returns>
         [DllImport("kernel32.dll")]
-        public static extern int VirtualQueryEx(
+        internal static extern int VirtualQueryEx(
             IntPtr hProcess,
             IntPtr lpAddress,
             out MEMORY_BASIC_INFORMATION lpBuffer,
@@ -62,19 +84,10 @@ namespace ZeroLimits.ZScanLib.MemoryManagement
             );
 
         /// <summary>
-        /// Retrieves the system info. 
-        /// </summary>
-        /// <param name="lpSystemInfo"></param>
-        [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern void GetSystemInfo(
-            [MarshalAs(UnmanagedType.Struct)] ref SYSTEM_INFO lpSystemInfo
-        );
-
-        /// <summary>
         /// Information about a linear address space's memory page. 
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct MEMORY_BASIC_INFORMATION
+        internal struct MEMORY_BASIC_INFORMATION
         {
             public IntPtr BaseAddress;
             public IntPtr AllocationBase;
@@ -85,7 +98,7 @@ namespace ZeroLimits.ZScanLib.MemoryManagement
             public MEMORY_TYPE Type;
         }
 
-        public enum AllocationProtect : uint
+        internal enum AllocationProtect : uint
         {
             PAGE_EXECUTE = 0x00000010,
             PAGE_EXECUTE_READ = 0X00000020,
@@ -100,14 +113,14 @@ namespace ZeroLimits.ZScanLib.MemoryManagement
             PAGE_WRITECOMBINE = 0x00000400,
         }
 
-        public enum MEMORY_STATE : uint
+        internal enum MEMORY_STATE : uint
         {
             MEM_COMMIT = 0x1000,
             MEM_FREE = 0x10000,
             MEM_RESERVE = 0x2000
         }
 
-        public enum MEMORY_TYPE : uint
+        internal enum MEMORY_TYPE : uint
         {
             MEM_IMAGE = 0x1000000,
             MEM_MAPPED = 0x40000,
@@ -115,10 +128,20 @@ namespace ZeroLimits.ZScanLib.MemoryManagement
         }
 
         /// <summary>
+        /// Retrieves the system info. 
+        /// </summary>
+        /// <param name="lpSystemInfo"></param>
+        [DllImport("kernel32.dll", SetLastError = true)]
+        internal static extern void GetSystemInfo(
+            [MarshalAs(UnmanagedType.Struct)] 
+            ref SYSTEM_INFO lpSystemInfo
+        );
+
+        /// <summary>
         /// The system info structure. 
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct SYSTEM_INFO
+        internal struct SYSTEM_INFO
         {
             internal PROCESSOR_INFO_UNION p;
             public uint dwPageSize;
@@ -136,7 +159,7 @@ namespace ZeroLimits.ZScanLib.MemoryManagement
         /// The process info structure. 
         /// </summary>
         [StructLayout(LayoutKind.Explicit)]
-        public struct PROCESSOR_INFO_UNION
+        internal struct PROCESSOR_INFO_UNION
         {
             [FieldOffset(0)]
             internal uint dwOemId;

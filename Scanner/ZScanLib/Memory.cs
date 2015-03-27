@@ -36,7 +36,7 @@ You should have received a copy of the GNU General Public License
  *      along with Clipper.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace ZeroLimits.ZScanLib.MemoryManagement
+namespace ZScanLib
 {
     using System;
     using System.Collections.Generic;
@@ -48,7 +48,7 @@ namespace ZeroLimits.ZScanLib.MemoryManagement
     /// 
     /// Wraps ReadProcessMemory and WriteProcessMemory API for easier usage.
     /// </summary>
-    public partial class Memory
+    public class Memory
     {
         /// <summary>
         /// Reads the amount of bytes from the given location.
@@ -57,13 +57,14 @@ namespace ZeroLimits.ZScanLib.MemoryManagement
         /// <param name="lpAddress"></param>
         /// <param name="btBuffer"></param>
         /// <returns></returns>
-        public static bool Peek(Process p, IntPtr lpAddress, byte[] btBuffer)
+        public static bool Peek(Process process, IntPtr lpAddress, byte[] btBuffer)
         {
-            if (p == null || btBuffer == null || btBuffer.Length == 0)
-                return false;
+            if (process == null) throw new ArgumentNullException("process");
+            if (btBuffer == null) throw new ArgumentNullException("btBuffer");
+            if (btBuffer.Length == 0) throw new ArgumentException("btBuffer");
 
             var read = new IntPtr(0);
-            return Memory.ReadProcessMemory(p.Handle, lpAddress, btBuffer, (uint)btBuffer.Length, ref read);
+            return WinAPI.ReadProcessMemory(process.Handle, lpAddress, btBuffer, (uint)btBuffer.Length, ref read);
         }
 
         /// <summary>
@@ -73,13 +74,14 @@ namespace ZeroLimits.ZScanLib.MemoryManagement
         /// <param name="lpAddress"></param>
         /// <param name="btBuffer"></param>
         /// <returns></returns>
-        public static bool Poke(Process p, IntPtr lpAddress, byte[] btBuffer)
+        public static bool Poke(Process process, IntPtr lpAddress, byte[] btBuffer)
         {
-            if (p == null)
-                return false;
+            if (process == null) throw new ArgumentNullException("process");
+            if (btBuffer == null) throw new ArgumentNullException("btBuffer");
+            if (btBuffer.Length == 0) throw new ArgumentException("btBuffer");
 
             var written = new IntPtr(0);
-            return Memory.WriteProcessMemory(p.Handle, lpAddress, btBuffer, (uint)btBuffer.Length, ref written);
-        }        
+            return WinAPI.WriteProcessMemory(process.Handle, lpAddress, btBuffer, (uint)btBuffer.Length, ref written);
+        }
     }
 }

@@ -24,27 +24,43 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZeroLimits.ZScanLib.MemoryManagement
+namespace ZScanLib
 {
     /// <summary>
-    /// Returns the system info object for the machine. We're mostly 
-    /// using it to retrieve the Lowest Memory Address: 
-    /// lpMinApplicationAddress. 
+    /// Retrieves system address information. 
     /// </summary>
-    public partial class Memory
+    internal class AddressInfo
     {
         /// <summary>
-        /// Returns a SYSTEM_INFO object. 
-        /// Used to get min / max address space points. 
+        /// The system's info that contains the max and memory 
+        /// address space addresses. 
         /// </summary>
-        /// <returns></returns>
-        public static SYSTEM_INFO SystemInfo
+        private static WinAPI.SYSTEM_INFO _systemInfo;
+
+        static AddressInfo()
+        {
+            WinAPI.GetSystemInfo(ref _systemInfo);
+        }
+
+        /// <summary>
+        /// The minimum memory address. 
+        /// </summary>
+        public static long MinimumAddress
         {
             get
             {
-                var SystemInfo = new SYSTEM_INFO();
-                GetSystemInfo(ref SystemInfo);
-                return SystemInfo;
+                return (long)_systemInfo.lpMinimumApplicationAddress;
+            }
+        }
+
+        /// <summary>
+        /// The max memory address. 
+        /// </summary>
+        public static long MaximumAddress
+        {
+            get
+            {
+                return (long)_systemInfo.lpMaximumApplicationAddress;
             }
         }
     }

@@ -23,12 +23,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ZeroLimits.ZScanLib.MemoryManagement
+namespace ZScanLib
 {
+    /// <summary>
+    /// Holds the information for locating values in memory. 
+    /// </summary>
     public class Signature
     {
+        public Signature(string pattern, string mask, int offset)
+        {
+            Pattern = pattern;
+            Mask = mask;
+            Offset = offset;
+        }
+
+        /// <summary>
+        /// A pattern that identifies a unique spot in a process's memory space. 
+        /// </summary>
         public String Pattern { get; set; }
+
+        /// <summary>
+        /// A mask to control what parts of the pattern must be matched. 
+        /// </summary>
         public String Mask { get; set; }
+
+        /// <summary>
+        /// A offset to be added after locating a pattern. 
+        /// </summary>
         public int Offset { get; set; }
     }
 }

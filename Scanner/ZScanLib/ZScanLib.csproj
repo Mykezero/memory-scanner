@@ -7,7 +7,7 @@
     <ProjectGuid>{C5BA1350-22BD-41BB-8864-2D65FD761075}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ZeroLimits.ZScanLib</RootNamespace>
+    <RootNamespace>ZScanLib</RootNamespace>
     <AssemblyName>ZScanLib</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -39,17 +39,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\Helpers.cs" />
-    <Compile Include="MemoryManagement\MemoryAddress.cs" />
-    <Compile Include="MemoryManagement\MemoryDefinitions.cs" />
-    <Compile Include="MemoryManagement\MemoryEnvironment.cs" />
-    <Compile Include="MemoryManagement\MemoryFilter.cs" />
-    <Compile Include="MemoryManagement\MemoryPage.cs" />
-    <Compile Include="MemoryManagement\MemoryPointer.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="IMemoryScanner.cs" />
+    <Compile Include="Memory.cs" />
+    <Compile Include="MemoryScanner.cs" />
+    <Compile Include="VirtualMemory.cs" />
+    <Compile Include="ModuleMemoryScanner.cs" />
+    <Compile Include="VirtualMemoryScanner.cs" />
+    <Compile Include="WinAPI.cs" />
+    <Compile Include="AddressInfo.cs" />
+    <Compile Include="VirtualMemoryPage.cs" />
+    <Compile Include="PatternMatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MemoryManagement\Signature.cs" />
-    <Compile Include="Documentation\SignatureExamples.cs" />
-    <Compile Include="MemoryManagement\SigScan.cs" />
+    <Compile Include="Signature.cs" />
+    <Compile Include="SignatureExamples.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
