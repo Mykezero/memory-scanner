@@ -54,25 +54,22 @@ namespace ZScanLib
                 if (pattern[count] != buffer[index])
                 {
                     // Its is not a wildcard character. 
-                    if (signature.Mask[count] != '?')
-                    {
-                        count = 0;
-                    }
+                    if (signature.Mask[count] != '?') count = 0;
                 }
                 else
                 {
-                    count++;
+                    // Yes, we've matched another part of the pattern so increment
+                    // count by one and check to see if we've matched the whole pattern. 
+                    if (++count == pattern.Length)
+                    {
+                        // We're subtracting the length from the index to get the starting position
+                        // where we found the pattern; index at the end points to the last element. 
+                        return (index - pattern.Length) + signature.Offset;
+                    }
                 }
 
+                // Increment index so we can look at the next byte in the buffer. 
                 index++;
-            }
-
-            // We've matched the pattern. 
-            if (count == pattern.Length)
-            {
-                // We're subtracting the length from the index to get the starting position
-                // where we found the pattern; index at the end points to the last element. 
-                return (index - pattern.Length) + signature.Offset;
             }
 
             return -1;

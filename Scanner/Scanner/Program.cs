@@ -36,19 +36,19 @@ namespace ZScanLib
         public class ScannerArgs
         {
             [ArgRequired(PromptIfMissing = true)]
-            [DefaultValue("pol")]
+            [DefaultValue("ffxiv")]
             public String ProcessName { get; set; }
 
             [ArgRequired(PromptIfMissing = true)]
-            [DefaultValue("8D048D00000000B9000000008D780400000000C70000000000F3A5")]
+            [DefaultValue("47616D654D61696E000000")]
             public String Signature { get; set; }
 
             [ArgRequired(PromptIfMissing = true)]
-            [DefaultValue("XXX????X????XX????XX?????XX")]
+            [DefaultValue("XXXXXXXXXXX")]
             public String Mask { get; set; }
 
             [ArgRequired(PromptIfMissing = true)]
-            [DefaultValue(0)]
+            [DefaultValue(1180)]
             public int Offset { get; set; }
         }
 
