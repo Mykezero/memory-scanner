@@ -40,12 +40,8 @@ namespace ZScanLib
             public String ProcessName { get; set; }
 
             [ArgRequired(PromptIfMissing = true)]
-            [DefaultValue("47616D654D61696E000000")]
+            [DefaultValue("8BEC8B450883F84A730A8B550C899481????????")]
             public String Signature { get; set; }
-
-            [ArgRequired(PromptIfMissing = true)]
-            [DefaultValue("XXXXXXXXXXX")]
-            public String Mask { get; set; }
 
             [ArgRequired(PromptIfMissing = true)]
             [DefaultValue(1180)]
@@ -56,7 +52,7 @@ namespace ZScanLib
         {
             // Obtain the Scanner Args data from the user. 
             var parsed = Args.Parse<ScannerArgs>(args);
-            var signature = new Signature(parsed.Signature, parsed.Mask, parsed.Offset);
+            var signature = new Signature(parsed.Signature, parsed.Offset);
 
             // Set the target process. 
             var process = Process.GetProcessesByName(parsed.ProcessName).FirstOrDefault();

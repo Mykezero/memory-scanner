@@ -42,36 +42,69 @@ namespace ZScanLib
             return Match(signature, buffer);
         }
 
+        /// <summary>
+        /// Finds the address for the given signature in the byte buffer. 
+        /// Returns the address or -1 on failure. 
+        /// </summary>
+        /// <param name="signature"></param>
+        /// <param name="buffer"></param>
+        /// <returns></returns>
         private int Match(Signature signature, byte[] buffer)
         {
+            // Convert our pattern to a byte array.
             var pattern = Helpers.HexStringToArray(signature.Pattern);
 
-            int count = 0, index = 0;
+            // The current amount of matched bytes. 
+            int count = 0; 
 
+            // The current index in our buffer we are scanning. 
+            int index = 0;
+
+            // Loop to scan all bytes in the buffer for a pattern. 
             while (index < buffer.Length)
             {
-                // We did not match the pattern
+                // If the pattern is a wildcard, skip it. 
+                if (signature.Pattern[count] == '?')
+                {
+                    // Increase the match count. 
+                    count++;
+
+                    // Increase our current position. 
+                    index++;
+
+                    // Skip to matching the next byte. 
+                    continue;
+                }
+
+                // We've failed to match this section of the pattern. 
                 if (pattern[count] != buffer[index])
                 {
-                    // Its is not a wildcard character. 
-                    if (signature.Mask[count] != '?') count = 0;
-                }
-                else
-                {
-                    // Yes, we've matched another part of the pattern so increment
-                    // count by one and check to see if we've matched the whole pattern. 
-                    if (++count == pattern.Length)
-                    {
-                        // We're subtracting the length from the index to get the starting position
-                        // where we found the pattern; index at the end points to the last element. 
-                        return (index - pattern.Length) + signature.Offset;
-                    }
+                    // Reset the match count. 
+                    count = 0;
+
+                    // Increase our buffer position to the next byte. 
+                    index++;
+
+                    // Skip this byte. 
+                    continue;
                 }
 
-                // Increment index so we can look at the next byte in the buffer. 
+                // We've matched a byte successfully so increment count by 1. 
+                count++;
+
+                // Count this byte as looked at so that we return the right address
                 index++;
+
+                // Check to see if we've matched the whole pattern. 
+                if (count == pattern.Length)
+                {
+                    // We're subtracting the length from the index to get the starting position
+                    // where we found the pattern; index at the end points to the last element. 
+                    return (index - pattern.Length) + signature.Offset;
+                }                
             }
 
+            // Return a sigil value on failure. 
             return -1;
         }
     }

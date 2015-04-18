@@ -30,10 +30,9 @@ namespace ZScanLib
     /// </summary>
     public class Signature
     {
-        public Signature(string pattern, string mask, int offset)
+        public Signature(string pattern, int offset)
         {
             Pattern = pattern;
-            Mask = mask;
             Offset = offset;
         }
 
@@ -41,11 +40,6 @@ namespace ZScanLib
         /// A pattern that identifies a unique spot in a process's memory space. 
         /// </summary>
         public String Pattern { get; set; }
-
-        /// <summary>
-        /// A mask to control what parts of the pattern must be matched. 
-        /// </summary>
-        public String Mask { get; set; }
 
         /// <summary>
         /// A offset to be added after locating a pattern. 
