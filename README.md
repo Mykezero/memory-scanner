@@ -22,8 +22,11 @@ var process = GetProcessByID("pol").FirstOrDefault();
 MemoryScanner scanner = new MemoryScanner(process);
 
 // Create a signature to scan the process's memory for. 
-Signature signature = new Signature(pattern, mask, offset)
+Signature signature = new Signature(pattern, offset)
 
 // Scan for the address that matches the signature. 
 IntPtr address = scanner.Scan(signature);
 ```
+
+### Signature Scanning
+The library uses the embedded mask type signature for its scanning. Byte signatures should be in the form of 123456????. All characters except for wildcards will be matched for both process module and virtual memory. 
