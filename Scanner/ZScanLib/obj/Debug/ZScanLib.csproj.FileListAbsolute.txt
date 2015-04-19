@@ -1,5 +1,0 @@
-C:\Users\Mike\Documents\GitHub\Scanner\Scanner\ZScanLib\bin\Debug\ZScanLib.dll
-C:\Users\Mike\Documents\GitHub\Scanner\Scanner\ZScanLib\bin\Debug\ZScanLib.pdb
-C:\Users\Mike\Documents\GitHub\Scanner\Scanner\ZScanLib\obj\Debug\ZScanLib.csprojResolveAssemblyReference.cache
-C:\Users\Mike\Documents\GitHub\Scanner\Scanner\ZScanLib\obj\Debug\ZScanLib.dll
-C:\Users\Mike\Documents\GitHub\Scanner\Scanner\ZScanLib\obj\Debug\ZScanLib.pdb
